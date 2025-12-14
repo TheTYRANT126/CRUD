@@ -22,6 +22,7 @@ fun HomeScreen(
     onThemeChange: (String) -> Unit,
     onNotificationToggle: (Boolean) -> Unit,
     onNavigateToUserList: () -> Unit,
+    onNavigateToProductList: () -> Unit,
     onEditarNombre: () -> Unit = {},
     onCambiarContrasena: () -> Unit = {}
 ) {
@@ -148,6 +149,29 @@ fun HomeScreen(
                 notificationsEnabled = usuario?.notificacionesActivadas ?: true,
                 onToggle = onNotificationToggle
             )
+
+            // Botón para ver productos
+            Button(
+                onClick = onNavigateToProductList,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Restaurant,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "VER PRODUCTOS",
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
 
             // Botón especial para admin: Ver todos los usuarios
             if (usuario?.esAdmin == true) {

@@ -28,16 +28,23 @@ import dagger.internal.MapBuilder;
 import dagger.internal.Preconditions;
 import dagger.internal.Provider;
 import edu.itvo.persistenciadatos.data.local.database.AppDatabase;
+import edu.itvo.persistenciadatos.data.local.database.ProductDao;
 import edu.itvo.persistenciadatos.data.local.database.UserDao;
+import edu.itvo.persistenciadatos.di.DataModule_ProvideProductRepositoryFactory;
 import edu.itvo.persistenciadatos.di.DataModule_ProvideUserRepositoryFactory;
 import edu.itvo.persistenciadatos.di.DatabaseModule_ProvideAppDatabaseFactory;
+import edu.itvo.persistenciadatos.di.DatabaseModule_ProvideProductDaoFactory;
 import edu.itvo.persistenciadatos.di.DatabaseModule_ProvideUserDaoFactory;
+import edu.itvo.persistenciadatos.domain.repository.ProductRepository;
 import edu.itvo.persistenciadatos.domain.repository.UserRepository;
 import edu.itvo.persistenciadatos.domain.usecase.ActualizarContrasenaUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.ActualizarNotificacionesUseCase;
+import edu.itvo.persistenciadatos.domain.usecase.ActualizarProductoUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.ActualizarTemaUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.ActualizarUsuarioUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.CerrarSesionUseCase;
+import edu.itvo.persistenciadatos.domain.usecase.CrearProductoUseCase;
+import edu.itvo.persistenciadatos.domain.usecase.EliminarProductoUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.EliminarUsuarioUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.GetUserPreferencesUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.GetUserUseCase;
@@ -45,6 +52,8 @@ import edu.itvo.persistenciadatos.domain.usecase.IsUserLoggedInUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.LoginUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.LoginUsuarioUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.LogoutUseCase;
+import edu.itvo.persistenciadatos.domain.usecase.ObtenerProductoPorIdUseCase;
+import edu.itvo.persistenciadatos.domain.usecase.ObtenerTodosLosProductosUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.ObtenerTodosLosUsuariosUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.ObtenerUsuarioActualUseCase;
 import edu.itvo.persistenciadatos.domain.usecase.ObtenerUsuarioPorIdUseCase;
@@ -62,6 +71,10 @@ import edu.itvo.persistenciadatos.presentation.viewmodel.MainViewModel;
 import edu.itvo.persistenciadatos.presentation.viewmodel.MainViewModel_HiltModules;
 import edu.itvo.persistenciadatos.presentation.viewmodel.MainViewModel_HiltModules_BindsModule_Binds_LazyMapKey;
 import edu.itvo.persistenciadatos.presentation.viewmodel.MainViewModel_HiltModules_KeyModule_Provide_LazyMapKey;
+import edu.itvo.persistenciadatos.presentation.viewmodel.ProductViewModel;
+import edu.itvo.persistenciadatos.presentation.viewmodel.ProductViewModel_HiltModules;
+import edu.itvo.persistenciadatos.presentation.viewmodel.ProductViewModel_HiltModules_BindsModule_Binds_LazyMapKey;
+import edu.itvo.persistenciadatos.presentation.viewmodel.ProductViewModel_HiltModules_KeyModule_Provide_LazyMapKey;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -396,7 +409,7 @@ public final class DaggerPersistenceApp_HiltComponents_SingletonC {
 
     @Override
     public Map<Class<?>, Boolean> getViewModelKeys() {
-      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(3).put(AdminViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, AdminViewModel_HiltModules.KeyModule.provide()).put(AuthViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, AuthViewModel_HiltModules.KeyModule.provide()).put(MainViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, MainViewModel_HiltModules.KeyModule.provide()).build());
+      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(4).put(AdminViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, AdminViewModel_HiltModules.KeyModule.provide()).put(AuthViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, AuthViewModel_HiltModules.KeyModule.provide()).put(MainViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, MainViewModel_HiltModules.KeyModule.provide()).put(ProductViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, ProductViewModel_HiltModules.KeyModule.provide()).build());
     }
 
     @Override
@@ -431,6 +444,8 @@ public final class DaggerPersistenceApp_HiltComponents_SingletonC {
     Provider<AuthViewModel> authViewModelProvider;
 
     Provider<MainViewModel> mainViewModelProvider;
+
+    Provider<ProductViewModel> productViewModelProvider;
 
     ViewModelCImpl(SingletonCImpl singletonCImpl, ActivityRetainedCImpl activityRetainedCImpl,
         SavedStateHandle savedStateHandleParam, ViewModelLifecycle viewModelLifecycleParam) {
@@ -509,17 +524,38 @@ public final class DaggerPersistenceApp_HiltComponents_SingletonC {
       return new IsUserLoggedInUseCase(singletonCImpl.provideUserRepositoryProvider.get());
     }
 
+    ObtenerTodosLosProductosUseCase obtenerTodosLosProductosUseCase() {
+      return new ObtenerTodosLosProductosUseCase(singletonCImpl.provideProductRepositoryProvider.get());
+    }
+
+    ObtenerProductoPorIdUseCase obtenerProductoPorIdUseCase() {
+      return new ObtenerProductoPorIdUseCase(singletonCImpl.provideProductRepositoryProvider.get());
+    }
+
+    CrearProductoUseCase crearProductoUseCase() {
+      return new CrearProductoUseCase(singletonCImpl.provideProductRepositoryProvider.get());
+    }
+
+    ActualizarProductoUseCase actualizarProductoUseCase() {
+      return new ActualizarProductoUseCase(singletonCImpl.provideProductRepositoryProvider.get());
+    }
+
+    EliminarProductoUseCase eliminarProductoUseCase() {
+      return new EliminarProductoUseCase(singletonCImpl.provideProductRepositoryProvider.get());
+    }
+
     @SuppressWarnings("unchecked")
     private void initialize(final SavedStateHandle savedStateHandleParam,
         final ViewModelLifecycle viewModelLifecycleParam) {
       this.adminViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
       this.authViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
       this.mainViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
+      this.productViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 3);
     }
 
     @Override
     public Map<Class<?>, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(3).put(AdminViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) (adminViewModelProvider))).put(AuthViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) (authViewModelProvider))).put(MainViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) (mainViewModelProvider))).build());
+      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(4).put(AdminViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) (adminViewModelProvider))).put(AuthViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) (authViewModelProvider))).put(MainViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) (mainViewModelProvider))).put(ProductViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) (productViewModelProvider))).build());
     }
 
     @Override
@@ -556,6 +592,9 @@ public final class DaggerPersistenceApp_HiltComponents_SingletonC {
 
           case 2: // edu.itvo.persistenciadatos.presentation.viewmodel.MainViewModel
           return (T) new MainViewModel(viewModelCImpl.getUserUseCase(), viewModelCImpl.loginUseCase(), viewModelCImpl.logoutUseCase(), viewModelCImpl.updateThemeUseCase(), viewModelCImpl.getUserPreferencesUseCase(), viewModelCImpl.isUserLoggedInUseCase());
+
+          case 3: // edu.itvo.persistenciadatos.presentation.viewmodel.ProductViewModel
+          return (T) new ProductViewModel(viewModelCImpl.obtenerTodosLosProductosUseCase(), viewModelCImpl.obtenerProductoPorIdUseCase(), viewModelCImpl.crearProductoUseCase(), viewModelCImpl.actualizarProductoUseCase(), viewModelCImpl.eliminarProductoUseCase());
 
           default: throw new AssertionError(id);
         }
@@ -643,6 +682,10 @@ public final class DaggerPersistenceApp_HiltComponents_SingletonC {
 
     Provider<UserRepository> provideUserRepositoryProvider;
 
+    Provider<ProductDao> provideProductDaoProvider;
+
+    Provider<ProductRepository> provideProductRepositoryProvider;
+
     SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
       initialize(applicationContextModuleParam);
@@ -654,6 +697,8 @@ public final class DaggerPersistenceApp_HiltComponents_SingletonC {
       this.provideAppDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<AppDatabase>(singletonCImpl, 2));
       this.provideUserDaoProvider = DoubleCheck.provider(new SwitchingProvider<UserDao>(singletonCImpl, 1));
       this.provideUserRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<UserRepository>(singletonCImpl, 0));
+      this.provideProductDaoProvider = DoubleCheck.provider(new SwitchingProvider<ProductDao>(singletonCImpl, 4));
+      this.provideProductRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<ProductRepository>(singletonCImpl, 3));
     }
 
     @Override
@@ -697,6 +742,12 @@ public final class DaggerPersistenceApp_HiltComponents_SingletonC {
 
           case 2: // edu.itvo.persistenciadatos.data.local.database.AppDatabase
           return (T) DatabaseModule_ProvideAppDatabaseFactory.provideAppDatabase(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 3: // edu.itvo.persistenciadatos.domain.repository.ProductRepository
+          return (T) DataModule_ProvideProductRepositoryFactory.provideProductRepository(singletonCImpl.provideProductDaoProvider.get());
+
+          case 4: // edu.itvo.persistenciadatos.data.local.database.ProductDao
+          return (T) DatabaseModule_ProvideProductDaoFactory.provideProductDao(singletonCImpl.provideAppDatabaseProvider.get());
 
           default: throw new AssertionError(id);
         }

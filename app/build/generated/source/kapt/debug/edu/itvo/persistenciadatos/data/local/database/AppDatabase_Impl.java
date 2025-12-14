@@ -27,21 +27,26 @@ import javax.annotation.processing.Generated;
 public final class AppDatabase_Impl extends AppDatabase {
   private volatile UserDao _userDao;
 
+  private volatile ProductDao _productDao;
+
   @Override
   @NonNull
   protected RoomOpenDelegate createOpenDelegate() {
-    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(1, "70f96a372fd6af263e6b19d50f59775e", "c36b445e4d044bd1e8ef845daff5f091") {
+    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(2, "1f30f091ccdbfa8c55da2b6a7d2b66b2", "97bb036138f91840dbed1e3177762734") {
       @Override
       public void createAllTables(@NonNull final SQLiteConnection connection) {
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `usuarios` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `email` TEXT NOT NULL, `passwordHash` TEXT NOT NULL, `esAdmin` INTEGER NOT NULL, `temaActual` TEXT NOT NULL, `notificacionesActivadas` INTEGER NOT NULL, `estaLogueado` INTEGER NOT NULL)");
         SQLite.execSQL(connection, "CREATE UNIQUE INDEX IF NOT EXISTS `index_usuarios_email` ON `usuarios` (`email`)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `productos` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `descripcion` TEXT NOT NULL, `precio` REAL NOT NULL, `ingredientes` TEXT NOT NULL)");
+        SQLite.execSQL(connection, "CREATE UNIQUE INDEX IF NOT EXISTS `index_productos_nombre` ON `productos` (`nombre`)");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '70f96a372fd6af263e6b19d50f59775e')");
+        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1f30f091ccdbfa8c55da2b6a7d2b66b2')");
       }
 
       @Override
       public void dropAllTables(@NonNull final SQLiteConnection connection) {
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `usuarios`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `productos`");
       }
 
       @Override
@@ -85,6 +90,22 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoUsuarios + "\n"
                   + " Found:\n" + _existingUsuarios);
         }
+        final Map<String, TableInfo.Column> _columnsProductos = new HashMap<String, TableInfo.Column>(5);
+        _columnsProductos.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProductos.put("nombre", new TableInfo.Column("nombre", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProductos.put("descripcion", new TableInfo.Column("descripcion", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProductos.put("precio", new TableInfo.Column("precio", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProductos.put("ingredientes", new TableInfo.Column("ingredientes", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysProductos = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesProductos = new HashSet<TableInfo.Index>(1);
+        _indicesProductos.add(new TableInfo.Index("index_productos_nombre", true, Arrays.asList("nombre"), Arrays.asList("ASC")));
+        final TableInfo _infoProductos = new TableInfo("productos", _columnsProductos, _foreignKeysProductos, _indicesProductos);
+        final TableInfo _existingProductos = TableInfo.read(connection, "productos");
+        if (!_infoProductos.equals(_existingProductos)) {
+          return new RoomOpenDelegate.ValidationResult(false, "productos(edu.itvo.persistenciadatos.data.local.database.ProductEntity).\n"
+                  + " Expected:\n" + _infoProductos + "\n"
+                  + " Found:\n" + _existingProductos);
+        }
         return new RoomOpenDelegate.ValidationResult(true, null);
       }
     };
@@ -96,12 +117,12 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final Map<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final Map<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "usuarios");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "usuarios", "productos");
   }
 
   @Override
   public void clearAllTables() {
-    super.performClear(false, "usuarios");
+    super.performClear(false, "usuarios", "productos");
   }
 
   @Override
@@ -109,6 +130,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected Map<Class<?>, List<Class<?>>> getRequiredTypeConverters() {
     final Map<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(UserDao.class, UserDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(ProductDao.class, ProductDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -137,6 +159,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _userDao = new UserDao_Impl(this);
         }
         return _userDao;
+      }
+    }
+  }
+
+  @Override
+  public ProductDao productDao() {
+    if (_productDao != null) {
+      return _productDao;
+    } else {
+      synchronized(this) {
+        if(_productDao == null) {
+          _productDao = new ProductDao_Impl(this);
+        }
+        return _productDao;
       }
     }
   }

@@ -1,8 +1,11 @@
 package edu.itvo.persistenciadatos.di
 
 import edu.itvo.persistenciadatos.data.local.database.UserDao
+import edu.itvo.persistenciadatos.data.local.database.ProductDao
 import edu.itvo.persistenciadatos.data.repository.UserRepositoryImpl
+import edu.itvo.persistenciadatos.data.repository.ProductRepositoryImpl
 import edu.itvo.persistenciadatos.domain.repository.UserRepository
+import edu.itvo.persistenciadatos.domain.repository.ProductRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +22,14 @@ object DataModule {
         userDao: UserDao
     ): UserRepository {
         return UserRepositoryImpl(userDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductRepository(
+        productDao: ProductDao
+    ): ProductRepository {
+        return ProductRepositoryImpl(productDao)
     }
 
     // DEPRECATED - DataStore ya no se usa, se migró a Room

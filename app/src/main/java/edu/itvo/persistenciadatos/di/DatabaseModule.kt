@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import edu.itvo.persistenciadatos.data.local.database.AppDatabase
 import edu.itvo.persistenciadatos.data.local.database.UserDao
+import edu.itvo.persistenciadatos.data.local.database.ProductDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,5 +34,11 @@ object DatabaseModule {
     @Singleton
     fun provideUserDao(database: AppDatabase): UserDao {
         return database.userDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductDao(database: AppDatabase): ProductDao {
+        return database.productDao()
     }
 }

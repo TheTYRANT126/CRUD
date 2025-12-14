@@ -47,6 +47,8 @@ import hilt_aggregated_deps._edu_itvo_persistenciadatos_presentation_viewmodel_A
 import hilt_aggregated_deps._edu_itvo_persistenciadatos_presentation_viewmodel_AuthViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._edu_itvo_persistenciadatos_presentation_viewmodel_MainViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._edu_itvo_persistenciadatos_presentation_viewmodel_MainViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._edu_itvo_persistenciadatos_presentation_viewmodel_ProductViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._edu_itvo_persistenciadatos_presentation_viewmodel_ProductViewModel_HiltModules_KeyModule;
 
 @ComponentTreeDeps(
     rootDeps = _edu_itvo_persistenciadatos_PersistenceApp.class,
@@ -97,7 +99,9 @@ import hilt_aggregated_deps._edu_itvo_persistenciadatos_presentation_viewmodel_M
         _edu_itvo_persistenciadatos_presentation_viewmodel_AuthViewModel_HiltModules_BindsModule.class,
         _edu_itvo_persistenciadatos_presentation_viewmodel_AuthViewModel_HiltModules_KeyModule.class,
         _edu_itvo_persistenciadatos_presentation_viewmodel_MainViewModel_HiltModules_BindsModule.class,
-        _edu_itvo_persistenciadatos_presentation_viewmodel_MainViewModel_HiltModules_KeyModule.class
+        _edu_itvo_persistenciadatos_presentation_viewmodel_MainViewModel_HiltModules_KeyModule.class,
+        _edu_itvo_persistenciadatos_presentation_viewmodel_ProductViewModel_HiltModules_BindsModule.class,
+        _edu_itvo_persistenciadatos_presentation_viewmodel_ProductViewModel_HiltModules_KeyModule.class
     }
 )
 public final class PersistenceApp_ComponentTreeDeps {
