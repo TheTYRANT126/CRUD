@@ -11,8 +11,15 @@ class CrearProductoUseCase @Inject constructor(
         nombre: String,
         descripcion: String,
         precio: Double,
-        ingredientes: String
+        ingredientes: String,
+        fechaCaducidad: String
     ): ResultadoProducto {
-        return productRepository.crearProducto(nombre, descripcion, precio, ingredientes)
+        return productRepository.crearProducto(
+            nombre,
+            descripcion,
+            precio,
+            ingredientes,
+            fechaCaducidad
+        )
     }
 }

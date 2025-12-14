@@ -40,7 +40,7 @@ public final class ProductDao_Impl implements ProductDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `productos` (`id`,`nombre`,`descripcion`,`precio`,`ingredientes`) VALUES (nullif(?, 0),?,?,?,?)";
+        return "INSERT OR REPLACE INTO `productos` (`id`,`nombre`,`descripcion`,`precio`,`ingredientes`,`fechaCaducidad`) VALUES (nullif(?, 0),?,?,?,?,?)";
       }
 
       @Override
@@ -62,6 +62,11 @@ public final class ProductDao_Impl implements ProductDao {
           statement.bindNull(5);
         } else {
           statement.bindText(5, entity.getIngredientes());
+        }
+        if (entity.getFechaCaducidad() == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindText(6, entity.getFechaCaducidad());
         }
       }
     };
@@ -82,7 +87,7 @@ public final class ProductDao_Impl implements ProductDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `productos` SET `id` = ?,`nombre` = ?,`descripcion` = ?,`precio` = ?,`ingredientes` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `productos` SET `id` = ?,`nombre` = ?,`descripcion` = ?,`precio` = ?,`ingredientes` = ?,`fechaCaducidad` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -105,7 +110,12 @@ public final class ProductDao_Impl implements ProductDao {
         } else {
           statement.bindText(5, entity.getIngredientes());
         }
-        statement.bindLong(6, entity.getId());
+        if (entity.getFechaCaducidad() == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindText(6, entity.getFechaCaducidad());
+        }
+        statement.bindLong(7, entity.getId());
       }
     };
   }
@@ -153,6 +163,7 @@ public final class ProductDao_Impl implements ProductDao {
         final int _cursorIndexOfDescripcion = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "descripcion");
         final int _cursorIndexOfPrecio = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "precio");
         final int _cursorIndexOfIngredientes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "ingredientes");
+        final int _cursorIndexOfFechaCaducidad = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "fechaCaducidad");
         final ProductEntity _result;
         if (_stmt.step()) {
           final int _tmpId;
@@ -177,7 +188,13 @@ public final class ProductDao_Impl implements ProductDao {
           } else {
             _tmpIngredientes = _stmt.getText(_cursorIndexOfIngredientes);
           }
-          _result = new ProductEntity(_tmpId,_tmpNombre,_tmpDescripcion,_tmpPrecio,_tmpIngredientes);
+          final String _tmpFechaCaducidad;
+          if (_stmt.isNull(_cursorIndexOfFechaCaducidad)) {
+            _tmpFechaCaducidad = null;
+          } else {
+            _tmpFechaCaducidad = _stmt.getText(_cursorIndexOfFechaCaducidad);
+          }
+          _result = new ProductEntity(_tmpId,_tmpNombre,_tmpDescripcion,_tmpPrecio,_tmpIngredientes,_tmpFechaCaducidad);
         } else {
           _result = null;
         }
@@ -199,6 +216,7 @@ public final class ProductDao_Impl implements ProductDao {
         final int _cursorIndexOfDescripcion = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "descripcion");
         final int _cursorIndexOfPrecio = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "precio");
         final int _cursorIndexOfIngredientes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "ingredientes");
+        final int _cursorIndexOfFechaCaducidad = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "fechaCaducidad");
         final List<ProductEntity> _result = new ArrayList<ProductEntity>();
         while (_stmt.step()) {
           final ProductEntity _item;
@@ -224,7 +242,13 @@ public final class ProductDao_Impl implements ProductDao {
           } else {
             _tmpIngredientes = _stmt.getText(_cursorIndexOfIngredientes);
           }
-          _item = new ProductEntity(_tmpId,_tmpNombre,_tmpDescripcion,_tmpPrecio,_tmpIngredientes);
+          final String _tmpFechaCaducidad;
+          if (_stmt.isNull(_cursorIndexOfFechaCaducidad)) {
+            _tmpFechaCaducidad = null;
+          } else {
+            _tmpFechaCaducidad = _stmt.getText(_cursorIndexOfFechaCaducidad);
+          }
+          _item = new ProductEntity(_tmpId,_tmpNombre,_tmpDescripcion,_tmpPrecio,_tmpIngredientes,_tmpFechaCaducidad);
           _result.add(_item);
         }
         return _result;
@@ -252,6 +276,7 @@ public final class ProductDao_Impl implements ProductDao {
         final int _cursorIndexOfDescripcion = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "descripcion");
         final int _cursorIndexOfPrecio = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "precio");
         final int _cursorIndexOfIngredientes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "ingredientes");
+        final int _cursorIndexOfFechaCaducidad = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "fechaCaducidad");
         final ProductEntity _result;
         if (_stmt.step()) {
           final int _tmpId;
@@ -276,7 +301,13 @@ public final class ProductDao_Impl implements ProductDao {
           } else {
             _tmpIngredientes = _stmt.getText(_cursorIndexOfIngredientes);
           }
-          _result = new ProductEntity(_tmpId,_tmpNombre,_tmpDescripcion,_tmpPrecio,_tmpIngredientes);
+          final String _tmpFechaCaducidad;
+          if (_stmt.isNull(_cursorIndexOfFechaCaducidad)) {
+            _tmpFechaCaducidad = null;
+          } else {
+            _tmpFechaCaducidad = _stmt.getText(_cursorIndexOfFechaCaducidad);
+          }
+          _result = new ProductEntity(_tmpId,_tmpNombre,_tmpDescripcion,_tmpPrecio,_tmpIngredientes,_tmpFechaCaducidad);
         } else {
           _result = null;
         }

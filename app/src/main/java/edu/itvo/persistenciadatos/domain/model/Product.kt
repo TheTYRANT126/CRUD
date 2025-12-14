@@ -5,5 +5,6 @@ data class Product(
     val nombre: String,
     val descripcion: String,
     val precio: Double,
-    val ingredientes: String
+    val ingredientes: String,
+    val fechaCaducidad: String
 )

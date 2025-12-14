@@ -19,7 +19,7 @@ import edu.itvo.persistenciadatos.domain.model.Product
 @Composable
 fun ProductEditScreen(
     producto: Product?,
-    onGuardar: (String, String, Double, String) -> Unit,
+    onGuardar: (String, String, Double, String, String) -> Unit,
     onActualizar: (Product) -> Unit,
     onNavigateBack: () -> Unit,
     isLoading: Boolean = false,
@@ -31,11 +31,11 @@ fun ProductEditScreen(
     var descripcion by remember(producto) { mutableStateOf(producto?.descripcion ?: "") }
     var precio by remember(producto) { mutableStateOf(producto?.precio?.toString() ?: "") }
     var ingredientes by remember(producto) { mutableStateOf(producto?.ingredientes ?: "") }
+    var fechaCaducidad by remember(producto) { mutableStateOf(producto?.fechaCaducidad ?: "") }
 
     var nombreError by remember { mutableStateOf(false) }
     var descripcionError by remember { mutableStateOf(false) }
     var precioError by remember { mutableStateOf(false) }
-    var ingredientesError by remember { mutableStateOf(false) }
 
     fun validarCampos(): Boolean {
         // Validar nombre
@@ -48,10 +48,8 @@ fun ProductEditScreen(
         val precioDouble = precio.toDoubleOrNull()
         precioError = precioDouble == null || precioDouble <= 0
 
-        // Validar ingredientes
-        ingredientesError = ingredientes.isBlank()
-
-        return !nombreError && !descripcionError && !precioError && !ingredientesError
+        // Ingredientes y fecha de caducidad pueden quedar vacíos
+        return !nombreError && !descripcionError && !precioError
     }
 
     Scaffold(
@@ -179,6 +177,24 @@ fun ProductEditScreen(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
 
+            // Campo de fecha de caducidad
+            OutlinedTextField(
+                value = fechaCaducidad,
+                onValueChange = {
+                    fechaCaducidad = it
+                },
+                label = { Text("Fecha de caducidad (yyyy-MM-dd opcional)") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.CalendarToday,
+                        contentDescription = "Fecha de caducidad Icon"
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            )
+
             // Campo de precio
             OutlinedTextField(
                 value = precio,
@@ -212,28 +228,12 @@ fun ProductEditScreen(
                 value = ingredientes,
                 onValueChange = {
                     ingredientes = it
-                    ingredientesError = false
                 },
-                label = { Text("Ingredientes") },
+                label = { Text("Ingredientes opcional") },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.MenuBook,
                         contentDescription = "Ingredientes Icon"
-                    )
-                },
-                isError = ingredientesError,
-                supportingText = {
-                    Text(
-                        text = if (ingredientesError) {
-                            "Los ingredientes no pueden estar vacíos"
-                        } else {
-                            "Queso, jamón, tomate..."
-                        },
-                        color = if (ingredientesError) {
-                            MaterialTheme.colorScheme.error
-                        } else {
-                            MaterialTheme.colorScheme.onSurfaceVariant
-                        }
                     )
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -293,13 +293,14 @@ fun ProductEditScreen(
                         if (validarCampos()) {
                             val precioDouble = precio.toDoubleOrNull() ?: 0.0
                             if (esNuevoProducto) {
-                                onGuardar(nombre, descripcion, precioDouble, ingredientes)
+                                onGuardar(nombre, descripcion, precioDouble, ingredientes, fechaCaducidad)
                             } else {
                                 val productoActualizado = producto!!.copy(
                                     nombre = nombre,
                                     descripcion = descripcion,
                                     precio = precioDouble,
-                                    ingredientes = ingredientes
+                                    ingredientes = ingredientes,
+                                    fechaCaducidad = fechaCaducidad
                                 )
                                 onActualizar(productoActualizado)
                             }

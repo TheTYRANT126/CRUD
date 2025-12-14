@@ -13,8 +13,6 @@ class ProductRepositoryImpl @Inject constructor(
     private val productDao: ProductDao
 ) : ProductRepository {
 
-    // ===== CRUD DE PRODUCTOS =====
-
     override fun obtenerTodosLosProductos(): Flow<List<Product>> {
         return productDao.obtenerTodosLosProductos().map { entities ->
             entities.map { it.toProduct() }
@@ -33,7 +31,8 @@ class ProductRepositoryImpl @Inject constructor(
         nombre: String,
         descripcion: String,
         precio: Double,
-        ingredientes: String
+        ingredientes: String,
+        fechaCaducidad: String
     ): ResultadoProducto {
         return try {
             // Verificar si el nombre ya existe
@@ -56,17 +55,13 @@ class ProductRepositoryImpl @Inject constructor(
                 return ResultadoProducto.Error("El precio debe ser mayor a 0")
             }
 
-            // Validar ingredientes
-            if (ingredientes.isBlank()) {
-                return ResultadoProducto.Error("Debe especificar los ingredientes")
-            }
-
             // Crear producto
             val nuevoProducto = ProductEntity(
                 nombre = nombre,
                 descripcion = descripcion,
                 precio = precio,
-                ingredientes = ingredientes
+                ingredientes = ingredientes,
+                fechaCaducidad = fechaCaducidad
             )
 
             productDao.insertarProducto(nuevoProducto)
@@ -93,11 +88,6 @@ class ProductRepositoryImpl @Inject constructor(
                 return false
             }
 
-            // Validar ingredientes
-            if (producto.ingredientes.isBlank()) {
-                return false
-            }
-
             // Verificar si el nombre ya existe en otro producto
             val productoConNombre = productDao.obtenerProductoPorNombre(producto.nombre)
             if (productoConNombre != null && productoConNombre.id != producto.id) {
@@ -110,7 +100,8 @@ class ProductRepositoryImpl @Inject constructor(
                 nombre = producto.nombre,
                 descripcion = producto.descripcion,
                 precio = producto.precio,
-                ingredientes = producto.ingredientes
+                ingredientes = producto.ingredientes,
+                fechaCaducidad = producto.fechaCaducidad
             )
 
             productDao.actualizarProducto(productoActualizado)
@@ -147,7 +138,8 @@ class ProductRepositoryImpl @Inject constructor(
             nombre = this.nombre,
             descripcion = this.descripcion,
             precio = this.precio,
-            ingredientes = this.ingredientes
+            ingredientes = this.ingredientes,
+            fechaCaducidad = this.fechaCaducidad
         )
     }
 }

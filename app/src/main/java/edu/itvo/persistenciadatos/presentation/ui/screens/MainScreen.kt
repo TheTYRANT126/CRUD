@@ -249,8 +249,14 @@ fun MainScreen(
 
             ProductEditScreen(
                 producto = null, // null indica que es un nuevo producto
-                onGuardar = { nombre, descripcion, precio, ingredientes ->
-                    productViewModel.crearProducto(nombre, descripcion, precio, ingredientes)
+                onGuardar = { nombre, descripcion, precio, ingredientes, fechaCaducidad ->
+                    productViewModel.crearProducto(
+                        nombre,
+                        descripcion,
+                        precio,
+                        ingredientes,
+                        fechaCaducidad
+                    )
                 },
                 onActualizar = { /* No se usa en modo creación */ },
                 onNavigateBack = {
@@ -288,7 +294,7 @@ fun MainScreen(
 
             ProductEditScreen(
                 producto = producto,
-                onGuardar = { _, _, _, _ -> /* No se usa en modo edición */ },
+                onGuardar = { _, _, _, _, _ -> /* No se usa en modo edición */ },
                 onActualizar = { productoActualizado ->
                     productViewModel.actualizarProducto(productoActualizado)
                 },

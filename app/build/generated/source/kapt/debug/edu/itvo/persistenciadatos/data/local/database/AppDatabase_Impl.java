@@ -32,15 +32,15 @@ public final class AppDatabase_Impl extends AppDatabase {
   @Override
   @NonNull
   protected RoomOpenDelegate createOpenDelegate() {
-    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(2, "1f30f091ccdbfa8c55da2b6a7d2b66b2", "97bb036138f91840dbed1e3177762734") {
+    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(3, "ceae8148459d576a4769e0e54d0cdf24", "746bbd37601f815fb85d167a5f25fccb") {
       @Override
       public void createAllTables(@NonNull final SQLiteConnection connection) {
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `usuarios` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `email` TEXT NOT NULL, `passwordHash` TEXT NOT NULL, `esAdmin` INTEGER NOT NULL, `temaActual` TEXT NOT NULL, `notificacionesActivadas` INTEGER NOT NULL, `estaLogueado` INTEGER NOT NULL)");
         SQLite.execSQL(connection, "CREATE UNIQUE INDEX IF NOT EXISTS `index_usuarios_email` ON `usuarios` (`email`)");
-        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `productos` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `descripcion` TEXT NOT NULL, `precio` REAL NOT NULL, `ingredientes` TEXT NOT NULL)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `productos` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `descripcion` TEXT NOT NULL, `precio` REAL NOT NULL, `ingredientes` TEXT NOT NULL, `fechaCaducidad` TEXT NOT NULL)");
         SQLite.execSQL(connection, "CREATE UNIQUE INDEX IF NOT EXISTS `index_productos_nombre` ON `productos` (`nombre`)");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1f30f091ccdbfa8c55da2b6a7d2b66b2')");
+        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ceae8148459d576a4769e0e54d0cdf24')");
       }
 
       @Override
@@ -90,12 +90,13 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoUsuarios + "\n"
                   + " Found:\n" + _existingUsuarios);
         }
-        final Map<String, TableInfo.Column> _columnsProductos = new HashMap<String, TableInfo.Column>(5);
+        final Map<String, TableInfo.Column> _columnsProductos = new HashMap<String, TableInfo.Column>(6);
         _columnsProductos.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProductos.put("nombre", new TableInfo.Column("nombre", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProductos.put("descripcion", new TableInfo.Column("descripcion", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProductos.put("precio", new TableInfo.Column("precio", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProductos.put("ingredientes", new TableInfo.Column("ingredientes", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProductos.put("fechaCaducidad", new TableInfo.Column("fechaCaducidad", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final Set<TableInfo.ForeignKey> _foreignKeysProductos = new HashSet<TableInfo.ForeignKey>(0);
         final Set<TableInfo.Index> _indicesProductos = new HashSet<TableInfo.Index>(1);
         _indicesProductos.add(new TableInfo.Index("index_productos_nombre", true, Arrays.asList("nombre"), Arrays.asList("ASC")));

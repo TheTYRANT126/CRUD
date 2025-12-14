@@ -44,11 +44,23 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-    fun crearProducto(nombre: String, descripcion: String, precio: Double, ingredientes: String) {
+    fun crearProducto(
+        nombre: String,
+        descripcion: String,
+        precio: Double,
+        ingredientes: String,
+        fechaCaducidad: String
+    ) {
         viewModelScope.launch {
             _productUiState.value = ProductUiState.Loading
 
-            val resultado = crearProductoUseCase(nombre, descripcion, precio, ingredientes)
+            val resultado = crearProductoUseCase(
+                nombre,
+                descripcion,
+                precio,
+                ingredientes,
+                fechaCaducidad
+            )
             _productUiState.value = when (resultado) {
                 is ResultadoProducto.Exito -> ProductUiState.Success("Producto creado exitosamente")
                 is ResultadoProducto.Error -> ProductUiState.Error(resultado.mensaje)
