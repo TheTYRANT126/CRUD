@@ -48,10 +48,9 @@ class MainViewModel @Inject constructor(
         initialValue = UserUiState()
     )
 
-    fun login(name: String, email: String, age: Int) {
+    fun login(email: String, contrasena: String) {
         viewModelScope.launch {
-            val user = User(name, email, age)
-            loginUseCase(user)
+            loginUseCase(email, contrasena)
         }
     }
 

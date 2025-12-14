@@ -1,61 +1,41 @@
 package edu.itvo.persistenciadatos.presentation.ui.screens
 
 import android.util.Patterns
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Login
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onLogin: (String, String, Int) -> Unit
+    onLogin: (String, String) -> Unit,
+    onNavigateToRegister: () -> Unit,
+    errorMensaje: String? = null,
+    isLoading: Boolean = false
 ) {
-    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-    var age by remember { mutableStateOf("") }
-    var nameError by remember { mutableStateOf(false) }
+    var contrasena by remember { mutableStateOf("") }
     var emailError by remember { mutableStateOf(false) }
-    var ageError by remember { mutableStateOf(false) }
+    var contrasenaError by remember { mutableStateOf(false) }
+    var mostrarContrasena by remember { mutableStateOf(false) }
 
-    fun validateInputs(): Boolean {
-        nameError = name.isBlank()
+    fun validarCampos(): Boolean {
         emailError = email.isBlank() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        ageError = age.isBlank() || age.toIntOrNull() == null || (age.toIntOrNull() ?: 0) <= 0
-        return !nameError && !emailError && !ageError
+        contrasenaError = contrasena.isBlank()
+        return !emailError && !contrasenaError
     }
 
     Scaffold(
@@ -63,7 +43,7 @@ fun LoginScreen(
             TopAppBar(
                 title = {
                     Text(
-                        "Bienvenido",
+                        "Iniciar Sesión",
                         style = MaterialTheme.typography.headlineSmall
                     )
                 },
@@ -94,48 +74,18 @@ fun LoginScreen(
             )
 
             Text(
-                text = "Ingresa tus datos",
+                text = "Bienvenido de nuevo",
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
             Text(
-                text = "Completa el formulario para continuar",
+                text = "Ingresa tus credenciales para continuar",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(bottom = 32.dp)
-            )
-
-            // Campo de nombre
-            OutlinedTextField(
-                value = name,
-                onValueChange = {
-                    name = it
-                    nameError = false
-                },
-                label = { Text("Nombre completo") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "Name Icon"
-                    )
-                },
-                isError = nameError,
-                supportingText = {
-                    if (nameError) {
-                        Text(
-                            text = "El nombre es requerido",
-                            color = MaterialTheme.colorScheme.error
-                        )
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
 
             // Campo de email
@@ -168,70 +118,126 @@ fun LoginScreen(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
 
-            // Campo de edad
+            // Campo de contraseña
             OutlinedTextField(
-                value = age,
+                value = contrasena,
                 onValueChange = {
-                    age = it.filter { char -> char.isDigit() }
-                    ageError = false
+                    contrasena = it
+                    contrasenaError = false
                 },
-                label = { Text("Edad") },
+                label = { Text("Contraseña") },
                 leadingIcon = {
                     Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = "Age Icon"
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = "Password Icon"
                     )
                 },
-                isError = ageError,
+                trailingIcon = {
+                    IconButton(onClick = { mostrarContrasena = !mostrarContrasena }) {
+                        Icon(
+                            imageVector = if (mostrarContrasena) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                            contentDescription = if (mostrarContrasena) "Ocultar contraseña" else "Mostrar contraseña"
+                        )
+                    }
+                },
+                visualTransformation = if (mostrarContrasena) VisualTransformation.None else PasswordVisualTransformation(),
+                isError = contrasenaError,
                 supportingText = {
-                    if (ageError) {
+                    if (contrasenaError) {
                         Text(
-                            text = "Ingresa una edad válida",
+                            text = "La contraseña es requerida",
                             color = MaterialTheme.colorScheme.error
                         )
                     }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 32.dp),
+                    .padding(bottom = 8.dp),
                 singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
+
+            // Mostrar error si existe
+            if (errorMensaje != null) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    )
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Error,
+                            contentDescription = "Error",
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = errorMensaje,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Botón de login
             Button(
                 onClick = {
-                    if (validateInputs()) {
-                        val ageInt = age.toIntOrNull() ?: 0
-                        onLogin(name, email, ageInt)
+                    if (validarCampos()) {
+                        onLogin(email, contrasena)
                     }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                enabled = name.isNotBlank() && email.isNotBlank() && age.isNotBlank()
+                enabled = !isLoading && email.isNotBlank() && contrasena.isNotBlank()
             ) {
-                Icon(
-                    imageVector = Icons.Default.Login,
-                    contentDescription = null,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Iniciar Sesión",
-                    style = MaterialTheme.typography.titleMedium
-                )
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(20.dp),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.Login,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Iniciar Sesión",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // Texto informativo
-            Text(
-                text = "Tus datos se guardarán de forma segura",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
+            // Link a registro
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "¿No tienes cuenta? ",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "Regístrate aquí",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable { onNavigateToRegister() }
+                )
+            }
         }
     }
 }

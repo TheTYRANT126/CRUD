@@ -1,25 +1,38 @@
 package edu.itvo.persistenciadatos.domain.repository
 
 import edu.itvo.persistenciadatos.domain.model.User
-import edu.itvo.persistenciadatos.domain.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
+sealed class ResultadoRegistro {
+    object Exito : ResultadoRegistro()
+    data class Error(val mensaje: String) : ResultadoRegistro()
+}
+
+sealed class ResultadoLogin {
+    data class Exito(val usuario: User) : ResultadoLogin()
+    data class Error(val mensaje: String) : ResultadoLogin()
+}
+
 interface UserRepository {
-    // User data
-    suspend fun saveUser(user: User)
-    fun getUser(): Flow<User?>
+    // Autenticación
+    suspend fun registrarUsuario(nombre: String, email: String, contrasena: String, esAdmin: Boolean): ResultadoRegistro
+    suspend fun loginUsuario(email: String, contrasena: String): ResultadoLogin
+    suspend fun cerrarSesion()
 
-    // Authentication
-    suspend fun setLoginState(isLoggedIn: Boolean)
-    fun isLoggedIn(): Flow<Boolean>
+    // Usuario actual logueado
+    fun obtenerUsuarioLogueado(): Flow<User?>
 
-    // Preferences
-    suspend fun saveThemeMode(theme: String)
-    fun getThemeMode(): Flow<String>
-    suspend fun setNotificationsEnabled(enabled: Boolean)
-    fun areNotificationsEnabled(): Flow<Boolean>
-    fun getUserPreferences(): Flow<UserPreferences>
+    // CRUD de usuarios (para admin)
+    fun obtenerTodosLosUsuarios(): Flow<List<User>>
+    suspend fun obtenerUsuarioPorId(userId: Int): User?
+    suspend fun actualizarUsuario(usuario: User): Boolean
+    suspend fun eliminarUsuario(userId: Int): Boolean
 
-    // Clear
-    suspend fun clearAll()
+    // Preferencias
+    suspend fun actualizarTema(userId: Int, tema: String)
+    suspend fun actualizarNotificaciones(userId: Int, activadas: Boolean)
+    suspend fun actualizarContrasena(userId: Int, contrasenaActual: String, contrasenaNueva: String): Boolean
+
+    // Validaciones
+    suspend fun existeEmail(email: String): Boolean
 }

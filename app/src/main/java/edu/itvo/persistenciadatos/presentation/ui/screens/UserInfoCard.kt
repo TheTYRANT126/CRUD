@@ -65,7 +65,7 @@ fun UserInfoCard(user: User?) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = user?.name ?: "Usuario",
+                    text = user?.nombre ?: "Usuario",
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -89,24 +89,6 @@ fun UserInfoCard(user: User?) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp),
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        text = "${user?.age ?: 0} años",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
-                    )
-                }
             }
 
             // Botón de editar (placeholder)

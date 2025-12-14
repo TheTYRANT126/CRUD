@@ -1,0 +1,1 @@
+-keep,allowobfuscation,allowshrinking class edu.itvo.persistenciadatos.presentation.viewmodel.AuthViewModel

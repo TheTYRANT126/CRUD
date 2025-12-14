@@ -1,0 +1,49 @@
+edu.itvo.persistenciadatos.app-jetified-material-release-0 C:\Users\spide\.gradle\caches\8.13\transforms\068655efaf9d0a3f21e1360d0aadfabd\transformed\jetified-material-release\res
+edu.itvo.persistenciadatos.app-jetified-graphics-path-1.0.1-1 C:\Users\spide\.gradle\caches\8.13\transforms\099559c1d9699de880f05da2fa8d3d72\transformed\jetified-graphics-path-1.0.1\res
+edu.itvo.persistenciadatos.app-jetified-material-icons-extended-release-2 C:\Users\spide\.gradle\caches\8.13\transforms\0d2b1c8696e1d7b33b406725bb2f2d49\transformed\jetified-material-icons-extended-release\res
+edu.itvo.persistenciadatos.app-navigation-runtime-2.8.5-3 C:\Users\spide\.gradle\caches\8.13\transforms\174747aea4385147891ca724929b56d0\transformed\navigation-runtime-2.8.5\res
+edu.itvo.persistenciadatos.app-jetified-core-viewtree-1.0.0-4 C:\Users\spide\.gradle\caches\8.13\transforms\190ead3cbfd9ba37f72fcb88961e2a27\transformed\jetified-core-viewtree-1.0.0\res
+edu.itvo.persistenciadatos.app-jetified-ui-release-5 C:\Users\spide\.gradle\caches\8.13\transforms\1ecc2d965071e198159548186709ccac\transformed\jetified-ui-release\res
+edu.itvo.persistenciadatos.app-navigation-common-ktx-2.8.5-6 C:\Users\spide\.gradle\caches\8.13\transforms\2282fe0af2e84f37df5d3a5ff0fc4ad3\transformed\navigation-common-ktx-2.8.5\res
+edu.itvo.persistenciadatos.app-jetified-room-ktx-2.7.0-alpha11-7 C:\Users\spide\.gradle\caches\8.13\transforms\26c9daba312e55b91d6f9b624c22869b\transformed\jetified-room-ktx-2.7.0-alpha11\res
+edu.itvo.persistenciadatos.app-jetified-annotation-experimental-1.4.1-8 C:\Users\spide\.gradle\caches\8.13\transforms\2950636fcd1e52ca04bb9221c9d67adf\transformed\jetified-annotation-experimental-1.4.1\res
+edu.itvo.persistenciadatos.app-navigation-runtime-ktx-2.8.5-9 C:\Users\spide\.gradle\caches\8.13\transforms\3262d130284f2dc806f7e444ffeee1de\transformed\navigation-runtime-ktx-2.8.5\res
+edu.itvo.persistenciadatos.app-jetified-emoji2-1.4.0-10 C:\Users\spide\.gradle\caches\8.13\transforms\3814acc80063b063682ec88e597240f3\transformed\jetified-emoji2-1.4.0\res
+edu.itvo.persistenciadatos.app-jetified-tracing-1.2.0-11 C:\Users\spide\.gradle\caches\8.13\transforms\406a8706b53bc0905b98b13f72e3333c\transformed\jetified-tracing-1.2.0\res
+edu.itvo.persistenciadatos.app-jetified-activity-ktx-1.9.3-12 C:\Users\spide\.gradle\caches\8.13\transforms\57091c793ebd69295cdaa7fac9288153\transformed\jetified-activity-ktx-1.9.3\res
+edu.itvo.persistenciadatos.app-jetified-core-ktx-1.15.0-13 C:\Users\spide\.gradle\caches\8.13\transforms\58527603a6950470b25c446d054502f9\transformed\jetified-core-ktx-1.15.0\res
+edu.itvo.persistenciadatos.app-jetified-hilt-navigation-1.2.0-14 C:\Users\spide\.gradle\caches\8.13\transforms\5f5e6d8e87768cc47cdb1114e2d98f6f\transformed\jetified-hilt-navigation-1.2.0\res
+edu.itvo.persistenciadatos.app-jetified-hilt-navigation-compose-1.2.0-15 C:\Users\spide\.gradle\caches\8.13\transforms\628badfe4e132a9550eb395b6828f7aa\transformed\jetified-hilt-navigation-compose-1.2.0\res
+edu.itvo.persistenciadatos.app-jetified-material-ripple-release-16 C:\Users\spide\.gradle\caches\8.13\transforms\6e027205b4fcb4414cc69f109c521942\transformed\jetified-material-ripple-release\res
+edu.itvo.persistenciadatos.app-jetified-activity-compose-1.9.3-17 C:\Users\spide\.gradle\caches\8.13\transforms\6ed2738d96b863314b09cd6c11deccae\transformed\jetified-activity-compose-1.9.3\res
+edu.itvo.persistenciadatos.app-lifecycle-livedata-2.10.0-18 C:\Users\spide\.gradle\caches\8.13\transforms\77231a01dbe4194e497ef0b72e2d4e95\transformed\lifecycle-livedata-2.10.0\res
+edu.itvo.persistenciadatos.app-jetified-material-icons-core-release-19 C:\Users\spide\.gradle\caches\8.13\transforms\89df97747d3f4411b59d17ee05c23d5d\transformed\jetified-material-icons-core-release\res
+edu.itvo.persistenciadatos.app-jetified-ui-test-manifest-1.9.0-20 C:\Users\spide\.gradle\caches\8.13\transforms\8a9a3596ba22874b8219b912781e8909\transformed\jetified-ui-test-manifest-1.9.0\res
+edu.itvo.persistenciadatos.app-jetified-savedstate-ktx-1.4.0-21 C:\Users\spide\.gradle\caches\8.13\transforms\8c53255f9a2d2345304d03f0704548b1\transformed\jetified-savedstate-ktx-1.4.0\res
+edu.itvo.persistenciadatos.app-jetified-room-runtime-release-22 C:\Users\spide\.gradle\caches\8.13\transforms\92c081f2fb3b264ab4927833e622c3f6\transformed\jetified-room-runtime-release\res
+edu.itvo.persistenciadatos.app-jetified-customview-poolingcontainer-1.0.0-23 C:\Users\spide\.gradle\caches\8.13\transforms\95010588c64d8881f71e34e577f507d7\transformed\jetified-customview-poolingcontainer-1.0.0\res
+edu.itvo.persistenciadatos.app-core-1.15.0-24 C:\Users\spide\.gradle\caches\8.13\transforms\971b32910096bcf44bfd9c73b54ea6cc\transformed\core-1.15.0\res
+edu.itvo.persistenciadatos.app-jetified-lifecycle-viewmodel-ktx-2.10.0-25 C:\Users\spide\.gradle\caches\8.13\transforms\995a47f13e1e0de6d444b35d3a81b12e\transformed\jetified-lifecycle-viewmodel-ktx-2.10.0\res
+edu.itvo.persistenciadatos.app-jetified-profileinstaller-1.4.0-26 C:\Users\spide\.gradle\caches\8.13\transforms\a10adcbf6c6746fb2083c4fb7371893f\transformed\jetified-profileinstaller-1.4.0\res
+edu.itvo.persistenciadatos.app-core-runtime-2.2.0-27 C:\Users\spide\.gradle\caches\8.13\transforms\a4d0d47f6f471a6385a9b0c4cb40e38b\transformed\core-runtime-2.2.0\res
+edu.itvo.persistenciadatos.app-navigation-common-2.8.5-28 C:\Users\spide\.gradle\caches\8.13\transforms\a6c7bcc60fcf2cfa7d32ec9d1d5d7578\transformed\navigation-common-2.8.5\res
+edu.itvo.persistenciadatos.app-jetified-lifecycle-process-2.10.0-29 C:\Users\spide\.gradle\caches\8.13\transforms\ac07b86b8de6ae3ebd38bdb734ffe247\transformed\jetified-lifecycle-process-2.10.0\res
+edu.itvo.persistenciadatos.app-jetified-savedstate-30 C:\Users\spide\.gradle\caches\8.13\transforms\acc143b6ed0dfa11e5b96f9dd2fba6a3\transformed\jetified-savedstate\res
+edu.itvo.persistenciadatos.app-jetified-navigation-compose-2.8.5-31 C:\Users\spide\.gradle\caches\8.13\transforms\b0ad3c6ba63cb30cc589e43efee6680a\transformed\jetified-navigation-compose-2.8.5\res
+edu.itvo.persistenciadatos.app-jetified-material3-release-32 C:\Users\spide\.gradle\caches\8.13\transforms\b514e336fcb1f1600c95677dd4254b08\transformed\jetified-material3-release\res
+edu.itvo.persistenciadatos.app-jetified-foundation-release-33 C:\Users\spide\.gradle\caches\8.13\transforms\b6cbe65c2669836fcc1a3f7baf20fe24\transformed\jetified-foundation-release\res
+edu.itvo.persistenciadatos.app-lifecycle-livedata-core-2.10.0-34 C:\Users\spide\.gradle\caches\8.13\transforms\b9673bf97eb122c0cda20ab763af8728\transformed\lifecycle-livedata-core-2.10.0\res
+edu.itvo.persistenciadatos.app-jetified-ui-graphics-release-35 C:\Users\spide\.gradle\caches\8.13\transforms\c6f1544eb48ff037e97d27999e235878\transformed\jetified-ui-graphics-release\res
+edu.itvo.persistenciadatos.app-jetified-startup-runtime-1.1.1-36 C:\Users\spide\.gradle\caches\8.13\transforms\c9631e8bda8fbcd4060b96e0e4df6c60\transformed\jetified-startup-runtime-1.1.1\res
+edu.itvo.persistenciadatos.app-jetified-lifecycle-runtime-37 C:\Users\spide\.gradle\caches\8.13\transforms\cd93a55c9961def72b876005c093edb8\transformed\jetified-lifecycle-runtime\res
+edu.itvo.persistenciadatos.app-jetified-lifecycle-livedata-core-ktx-2.10.0-38 C:\Users\spide\.gradle\caches\8.13\transforms\d465298d26977f99ec460c1bb51e951c\transformed\jetified-lifecycle-livedata-core-ktx-2.10.0\res
+edu.itvo.persistenciadatos.app-fragment-1.5.1-39 C:\Users\spide\.gradle\caches\8.13\transforms\ddab319ca7833756894828ce735dce5b\transformed\fragment-1.5.1\res
+edu.itvo.persistenciadatos.app-jetified-activity-1.9.3-40 C:\Users\spide\.gradle\caches\8.13\transforms\dfbcf37d88471333eded50ee4b625c3b\transformed\jetified-activity-1.9.3\res
+edu.itvo.persistenciadatos.app-jetified-lifecycle-viewmodel-41 C:\Users\spide\.gradle\caches\8.13\transforms\e59c7ab3db79689aa8faeedc11f1ea7f\transformed\jetified-lifecycle-viewmodel\res
+edu.itvo.persistenciadatos.app-resValues-42 C:\Users\spide\Desktop\Prácticas Iván\CRUD\app\build\generated\res\resValues\debug
+edu.itvo.persistenciadatos.app-updated_navigation_xml-43 C:\Users\spide\Desktop\Prácticas Iván\CRUD\app\build\generated\updated_navigation_xml\debug
+edu.itvo.persistenciadatos.app-packageDebugResources-44 C:\Users\spide\Desktop\Prácticas Iván\CRUD\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+edu.itvo.persistenciadatos.app-packageDebugResources-45 C:\Users\spide\Desktop\Prácticas Iván\CRUD\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+edu.itvo.persistenciadatos.app-debug-46 C:\Users\spide\Desktop\Prácticas Iván\CRUD\app\build\intermediates\merged_res\debug\mergeDebugResources
+edu.itvo.persistenciadatos.app-debug-47 C:\Users\spide\Desktop\Prácticas Iván\CRUD\app\src\debug\res
+edu.itvo.persistenciadatos.app-main-48 C:\Users\spide\Desktop\Prácticas Iván\CRUD\app\src\main\res

@@ -68,13 +68,25 @@ dependencies {
     // ViewModel Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
     
-    // DataStore
+    // DataStore (deprecated - migrating to Room)
     implementation("androidx.datastore:datastore-preferences:1.2.0")
-    
+
+    // Room Database (compatible con Kotlin 2.1.0)
+    implementation("androidx.room:room-runtime:2.7.0-alpha11")
+    implementation("androidx.room:room-ktx:2.7.0-alpha11")
+    kapt("androidx.room:room-compiler:2.7.0-alpha11")
+
+    // BCrypt for password hashing
+    implementation("org.mindrot:jbcrypt:0.4")
+
+    // Navigation Compose
+    implementation("androidx.navigation:navigation-compose:2.8.5")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     implementation("androidx.compose.runtime:runtime")
-    
+
     // Hilt
     implementation("com.google.dagger:hilt-android:2.57.2")
     kapt("com.google.dagger:hilt-compiler:2.57.2")
