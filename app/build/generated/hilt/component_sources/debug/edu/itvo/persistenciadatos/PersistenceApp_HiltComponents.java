@@ -50,6 +50,7 @@ import edu.itvo.persistenciadatos.di.DomainModule;
 import edu.itvo.persistenciadatos.presentation.viewmodel.AdminViewModel_HiltModules;
 import edu.itvo.persistenciadatos.presentation.viewmodel.AuthViewModel_HiltModules;
 import edu.itvo.persistenciadatos.presentation.viewmodel.MainViewModel_HiltModules;
+import edu.itvo.persistenciadatos.presentation.viewmodel.ProductViewModel_HiltModules;
 import javax.annotation.processing.Generated;
 import javax.inject.Singleton;
 
@@ -166,7 +167,8 @@ public final class PersistenceApp_HiltComponents {
           HiltWrapper_ActivitySavedStateHandleModule.class,
           MainViewModel_HiltModules.KeyModule.class,
           ActivityCBuilderModule.class,
-          ViewModelCBuilderModule.class
+          ViewModelCBuilderModule.class,
+          ProductViewModel_HiltModules.KeyModule.class
       }
   )
   @ActivityRetainedScoped
@@ -205,7 +207,8 @@ public final class PersistenceApp_HiltComponents {
           AdminViewModel_HiltModules.BindsModule.class,
           AuthViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
-          MainViewModel_HiltModules.BindsModule.class
+          MainViewModel_HiltModules.BindsModule.class,
+          ProductViewModel_HiltModules.BindsModule.class
       }
   )
   @ViewModelScoped
